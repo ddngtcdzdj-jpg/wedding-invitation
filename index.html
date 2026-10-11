@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف - هاني & صفاء</title>
+    <!-- استيراد خطوط عربية ناعمة وأنيقة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #faf8f5;
+            font-family: 'Cairo', sans-serif;
+            color: #4a4a4a;
+            overflow-x: hidden;
+        }
+        /* نافذة الفيديو الافتتاحي الإجباري */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+        #player-container {
+            width: 90%;
+            max-width: 500px;
+        }
+        .intro-btn {
+            margin-top: 25px;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* تصميم صفحة الدعوة */
+        .invitation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px 25px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,0,0,0.04);
+            border-left: 1px solid #f0e6d2;
+            border-right: 1px solid #f0e6d2;
+        }
+        .header-title {
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: #8c733e;
+            margin-bottom: 20px;
+        }
+        .names {
+            font-family: 'Amiri', serif;
+            font-size: 38px;
+            color: #99752b;
+            margin: 25px 0;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .quote {
+            font-family: 'Amiri', serif;
+            font-size: 19px;
+            color: #5a5a5a;
+            line-height: 1.9;
+            margin: 30px 15px;
+            font-style: italic;
+            background: #fdfbf7;
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px dashed #e6d7b8;
+        }
+        .details-box {
+            margin: 35px 0;
+            padding: 20px;
+            border-top: 1px solid #f0e6d2;
+            border-bottom: 1px solid #f0e6d2;
+        }
+        .detail-item {
+            font-size: 17px;
+            margin: 12px 0;
+            color: #333;
+        }
+        .detail-item strong {
+            color: #99752b;
+        }
+        .map-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 28px;
+            background-color: #2d5a27;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 15px;
+            box-shadow: 0 3px 10px rgba(45, 90, 39, 0.2);
+            transition: background 0.3s;
+        }
+        .notes-box {
+            background-color: #faf5eb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 35px;
+            font-size: 15px;
+            color: #7a6332;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- طبقة الفيديو الافتتاحي الإجباري -->
+    <div id="intro-overlay">
+        <div id="player-container">
+            <iframe id="intro-video" width="100%" height="315" src="https://www.youtube.com/embed/hL4aFgAZAA0?enablejsapi=1&autoplay=1&controls=0&modestbranding=1" title="Intro Video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <button class="intro-btn" id="open-btn" style="display:none;" onclick="startInvitation()">اضغط هنا لفتح الدعوة</button>
+    </div>
+
+    <!-- مشغل الموسيقى الخفي في الخلفية -->
+    <div style="display:none;">
+        <iframe id="bg-music" width="1" height="1" src="https://www.youtube.com/embed/PmztIr7yDk8?enablejsapi=1&loop=1&playlist=PmztIr7yDk8" frameborder="0" allow="autoplay"></iframe>
+    </div>
+
+    <!-- محتوى الدعوة الرئيسي -->
+    <div class="invitation-container" id="main-content">
+        <div class="header-title">دعوة زفاف</div>
+        
+        <div class="names">هاني السحيمي<br>&amp;<br>صفاء نصر</div>
+
+        <div class="quote">
+            "عرِف معنى أن تُحِب فطرق بابي وأعزّ مقامي وأشعل الضوء ليخرج حبنا للحياة جِهارًا 💍❤️<br>
+            هنا تبدأ حكاية عمر ، وهنا نحتفل مع من لهم في القلبِ مكان في ليلةٍ حقّ لها أن تُسمى سيدة الليالي يسعدنا أن تكونوا جزءاً من فرحة لا تشبه سواها ، و على موعدٍ مع الفرح نلتقي 🌷🤍"
+        </div>
+
+        <div class="details-box">
+            <div class="detail-item"><strong>التاريخ:</strong> الأربعاء، 27 يناير 2027 م</div>
+            <div class="detail-item"><strong>الموافق:</strong> 19 شعبان 1448 هـ</div>
+            <div class="detail-item"><strong>المكان:</strong> قاعة طيبة لاند</div>
+            <a href="https://maps.app.goo.gl/FpdUXQciwf41hSsr6?g_st=ic" target="_blank" class="map-btn">📍 موقع القاعة على جوجل ماب</a>
+        </div>
+
+        <div class="notes-box">
+            📌 <strong>ملاحظات هامة:</strong><br>
+            • وقت الزفة الساعة 12:00 مساءً ⏰<br>
+            • ممنوع التصوير 📸<br>
+            • جنة الأطفال منازلهم 👶🏻
+        </div>
+
+        <div style="margin-top: 80px; padding-bottom: 60px;">
+            <p style="color: #a39274; font-size: 14px;">أهلاً وسهلاً بكم، بحضوركم تكتمل فرحتنا ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // إظهار زر الفتح بعد ثانيتين
+        setTimeout(function() {
+            document.getElementById('open-btn').style.display = 'block';
+        }, 2000);
+
+        function startInvitation() {
+            // إخفاء الفيديو الافتتاحي
+            var overlay = document.getElementById('intro-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 1000);
+
+            // بدء التمرير التلقائي الهادئ
+            startAutoScroll();
+        }
+
+        function startAutoScroll() {
+            let speed = 1; 
+            let timer = setInterval(function() {
+                window.scrollBy(0, speed);
+                if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+                    clearInterval(timer);
+                }
+            }, 35);
+        }
+    </script>
+</body>
+</html>
